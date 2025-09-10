@@ -1,8 +1,8 @@
 /**
- * @title MAXIM TOKEN
- * @dev This smart contract handles the MAXIM token.
+ * @title GUUDC TOKEN
+ * @dev This smart contract handles the GUUDC token.
  * @author GOODNESS E. (COAT)
- * @notice This contract is owned by MAXIM PAY, Inc.
+ * @notice This contract is owned by GUUDC PAY, Inc.
  * @dev Created on 22nd of May, 2024.
 */
 
@@ -16,7 +16,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
 
 
-contract MAXIM is ERC20, Ownable {
+contract GUUDC is ERC20, Ownable {
 
     /* CONSTANTS */
     uint256 immutable TOTAL_SUPPLY = 200_000_000;
@@ -42,7 +42,7 @@ contract MAXIM is ERC20, Ownable {
     address public PRE_SALE_TREASURY = 0x4Fa420BD8B6DaF25FaE43E6102785Ef637915B95;
     
 
-    constructor() ERC20("MAXIM", "MXM") {
+    constructor() ERC20("GUUDC", "GDC") {
        //mint the total supply
        _mint(address(this), TOTAL_SUPPLY * 1E18); 
        //transferOwnership(PRO_ADMIN); 
@@ -60,9 +60,9 @@ contract MAXIM is ERC20, Ownable {
         currentTier = currentTier - 1;
         uint amountToBuy = (1E18/SEED_SALE_USD_PRICE[currentTier]) * usdEquiv;
         //The requires
-        require((SEED_SALE[0] + SEED_SALE[1] + SEED_SALE[2]) >= amountToBuy, "Insufficient MAXIM tokens available for sale");
-        require((SEED_SALE[0] + SEED_SALE[1] + SEED_SALE[2]) <= totalSupply(), "Insufficient MAXIM tokens available for sale");
-        require(SEED_SALE[currentTier] >= amountToBuy, "Insufficient MAXIM tokens available for sale");
+        require((SEED_SALE[0] + SEED_SALE[1] + SEED_SALE[2]) >= amountToBuy, "Insufficient GUUDC tokens available for sale");
+        require((SEED_SALE[0] + SEED_SALE[1] + SEED_SALE[2]) <= totalSupply(), "Insufficient GUUDC tokens available for sale");
+        require(SEED_SALE[currentTier] >= amountToBuy, "Insufficient GUUDC tokens available for sale");
         if(tokenType == 1) {
             //transfer any excess back to sender
             require(msg.value >= amount, "Insufficient ETH available for purchase");
@@ -102,9 +102,9 @@ contract MAXIM is ERC20, Ownable {
         currentTier = currentTier - 1;
         uint amountToBuy = (1E18/PRIVATE_SALE_USD_PRICE[currentTier]) * usdEquiv;
         //The requires
-        require((PRIVATE_SALE[0] + PRIVATE_SALE[1] + PRIVATE_SALE[2] + PRIVATE_SALE[3]) >= amountToBuy, "Insufficient MAXIM tokens available for sale");
-        require((PRIVATE_SALE[0] + PRIVATE_SALE[1] + PRIVATE_SALE[2] + PRIVATE_SALE[3]) <= totalSupply(), "Insufficient MAXIM tokens available for sale");
-        require(PRIVATE_SALE[currentTier] >= amountToBuy, "Insufficient MAXIM tokens available for sale");
+        require((PRIVATE_SALE[0] + PRIVATE_SALE[1] + PRIVATE_SALE[2] + PRIVATE_SALE[3]) >= amountToBuy, "Insufficient GUUDC tokens available for sale");
+        require((PRIVATE_SALE[0] + PRIVATE_SALE[1] + PRIVATE_SALE[2] + PRIVATE_SALE[3]) <= totalSupply(), "Insufficient GUUDC tokens available for sale");
+        require(PRIVATE_SALE[currentTier] >= amountToBuy, "Insufficient GUUDC tokens available for sale");
         if(tokenType == 1) {
             //transfer any excess back to sender
             require(msg.value >= amount, "Insufficient ETH available for purchase");
@@ -144,9 +144,9 @@ contract MAXIM is ERC20, Ownable {
         currentTier = currentTier - 1;
         uint amountToBuy = (1E18/PRE_SALE_USD_PRICE[currentTier]) * usdEquiv;
         //The requires
-        require((PRE_SALE[0] + PRE_SALE[1]) >= amountToBuy, "Insufficient MAXIM tokens available for sale");
-        require((PRE_SALE[0] + PRE_SALE[1]) <= totalSupply(), "Insufficient MAXIM tokens available for sale");
-        require(PRE_SALE[currentTier] >= amountToBuy, "Insufficient MAXIM tokens available for sale");
+        require((PRE_SALE[0] + PRE_SALE[1]) >= amountToBuy, "Insufficient GUUDC tokens available for sale");
+        require((PRE_SALE[0] + PRE_SALE[1]) <= totalSupply(), "Insufficient GUUDC tokens available for sale");
+        require(PRE_SALE[currentTier] >= amountToBuy, "Insufficient GUUDC tokens available for sale");
         if(tokenType == 1) {
             //transfer any excess back to sender
             require(msg.value >= amount, "Insufficient ETH available for purchase");
@@ -180,7 +180,7 @@ contract MAXIM is ERC20, Ownable {
 
     /** GETTERS FUNCTIONS **/
 
-    /** Get the amount of MAXIM token a certain amount would purchase **/
+    /** Get the amount of GUUDC token a certain amount would purchase **/
     function getEquivAmount (uint256 amount, uint saleType, uint tokenType) external view returns (uint amountToBuy) {
         //check for seed sale
         amountToBuy = 0;
@@ -263,4 +263,5 @@ contract MAXIM is ERC20, Ownable {
     }
 
     
+
 }
